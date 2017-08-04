@@ -57,7 +57,13 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
+                                <!--Left Side Of Navbar -->
+                                <ul class="nav navbar-nav">
+                                    @if (Auth::check())
+                                    <li> <a href="{{ url('/home') }}">Dashboard</a></li>
+                                    <li><a href="{{ route('authors.index') }}">Penulis</a></li>
+                                    @endif
+                                    </ul>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -88,5 +94,6 @@
 
     
     @yield('scripts')
+    @include('layouts._flash')
 </body>
 </html>
