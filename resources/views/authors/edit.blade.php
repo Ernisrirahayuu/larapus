@@ -16,7 +16,7 @@
 				</div>
 
 				<div class="panel-body">
-					{!! Form::model($author, ['url' => route('author.update', $author->id), 'method'=>'put', 'class'=>'form-horizontal']) !!}
+					{!! Form::model($author, ['url' => route('authors.update', $author->id), 'method'=>'put', 'class'=>'form-horizontal']) !!}
 					@include('authors._form')
 					{!! Form::close() !!}
 				</div>

@@ -15,8 +15,8 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" >
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/jquery.dataTables.css" rel="stylesheet">
-    <link href="/css/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -41,9 +41,13 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        @if (Auth::check())
-                         <li><a href="{{ url('/home') }}">Dashboard</a></li>
-                        @endif
+                       
+                        @role('admin')
+                                    <li> <a href="{{ url('/home') }}">Dashboard</a></li>
+                                    <li><a href="{{ route('authors.index') }}">Penulis</a></li>
+                                    <li><a href="{{ route('books.index') }}">Buku</a></li>
+                                    @endif
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -59,10 +63,8 @@
                                 </a>
                                 <!--Left Side Of Navbar -->
                                 <ul class="nav navbar-nav">
-                                    @if (Auth::check())
-                                    <li> <a href="{{ url('/home') }}">Dashboard</a></li>
-                                    <li><a href="{{ route('authors.index') }}">Penulis</a></li>
-                                    @endif
+                            
+                                    
                                     </ul>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
@@ -83,17 +85,16 @@
                 </div>
             </div>
         </nav>
-
+        @include('layouts._flash')
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-    <script src="/js/jquery.dataTables.min.js"></script>
-    <script src="/js/dataTables.bootstrap.min.js"></script>
-
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="/js/custom.js"></script>
+@yield('scripts')
     
-    @yield('scripts')
-    @include('layouts._flash')
 </body>
 </html>

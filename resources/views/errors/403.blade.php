@@ -41,8 +41,10 @@
 <div class="container">
 	<div class="content">
 		<div class="title"></div>
-		<p>Maaf Anda tidak memiliki akses untuk fitur ini</p>
+		<center>
+		<p> <h1> Maaf, Anda tidak memiliki akses untuk fitur ini</p> </h1>
 		<p><a href="{{ url('/')}}">Kembali ke halaman awal</a></p>
+		</center>
 	</div>
 </div>
 </body>

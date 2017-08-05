@@ -19,9 +19,13 @@ class AuthorsController extends Controller
         if($request->ajax()) {
             $authors = Author::select(['id', 'name']);
             return Datatables::of($authors)
-            ->addColumn('action' ,function($author) {
+            ->addColumn('action' , function($authors) {
                 return view('datatable._action', [
-                    'edit_url'=> route('authors.edit', $author->id),]);
+                    'model'           =>$authors,
+                    'form_url'        =>route('authors.destroy', $authors->id),
+                    'edit_url'        =>route('authors.edit', $authors->id),
+                    'confirm_message' =>'Yakin mau menghapus' .$authors->name . '?'
+                    ]);
             })->make(true);
         }
 
@@ -54,7 +58,10 @@ class AuthorsController extends Controller
         //
         $this->validate($request,['name'=>'required|unique:authors']);
         $author = Author::create($request->only('name'));
-        Session::flash("flash_notification", ["level"=>"success", "message"=>"Berhasil menyimpan $author->name"]);
+        Session::flash("flash_notification", [
+            "level"=>"success", 
+            "message"=>"Berhasil menyimpan $author->nsame"
+            ]);
         return redirect()->route('authors.index');
 
 
@@ -112,5 +119,13 @@ class AuthorsController extends Controller
     public function destroy($id)
     {
         //
+        if(!Author::destroy($id)) return redirect()->back();
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Penulis Berhasil Dihapus"
+            ]);
+
+        return redirect()->route('authors.index');
     }
 }
